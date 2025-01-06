@@ -1,8 +1,3 @@
----
-title: WIK-DPS-TP01
-
----
-
 # WIK-DPS-TP01
 
 ### Fonctionnement : 
