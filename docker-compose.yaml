@@ -1,0 +1,35 @@
+services:
+  my-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "3000"
+    volumes:
+      - .:/app
+    environment:
+      - PING_LISTEN_PORT=3000
+    
+    networks:
+      - coucou
+    
+    deploy:
+      replicas: 4
+      endpoint_mode: dnsrr
+
+  reverse-proxy:
+    image: nginx:1.27.4
+    ports:
+      - "8080:80"
+    volumes:
+      - ./conf_nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - coucou
+    depends_on:
+      - my-api
+    
+
+networks:
+  coucou:
+    driver: bridge
+
